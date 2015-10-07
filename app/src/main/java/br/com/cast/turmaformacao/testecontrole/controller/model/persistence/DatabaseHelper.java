@@ -22,7 +22,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(StickerContract.getCreateTableScript());
-        sqLiteDatabase.execSQL(StickerContract.insertStickers());
+        for(int i = 0; i <= 400; i++){
+            sqLiteDatabase.execSQL(StickerContract.insertStickers(i));
+        }
+
     }
 
     @Override

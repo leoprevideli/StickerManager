@@ -57,23 +57,21 @@ public class StickerContract {
         return values;
     }
 
-    public static String insertStickers(){
+    public static String insertStickers(int i){
         StringBuilder sql = new StringBuilder();
-        for(int i = 0; i <= 10; i++){
-            sql.append(" INSERT INTO ");
-            sql.append(TABLE);
-            sql.append(" ( ");
-            sql.append(NUMBER + ", ");
-            sql.append(NAME + ", ");
-            sql.append(AMOUNT);
-            sql.append(" ) ");
-            sql.append(" VALUES ");
-            sql.append(" ( ");
-            sql.append(i + ", ");
-            sql.append("'" + "Name " + i + "'" + ", ");
-            sql.append("'" + (i*2) +"'");
-            sql.append(" ); ");
-        }
+        sql.append(" INSERT INTO ");
+        sql.append(TABLE);
+        sql.append(" ( ");
+        sql.append(NUMBER + ", ");
+        sql.append(NAME + ", ");
+        sql.append(AMOUNT);
+        sql.append(" ) ");
+        sql.append(" VALUES ");
+        sql.append(" ( ");
+        sql.append(i + ", ");
+        sql.append("'" + "Name " + i + "'" + ", ");
+        sql.append("'" + (i*2) +"'");
+        sql.append(" ); ");
         return sql.toString();
     }
 }

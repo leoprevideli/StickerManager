@@ -2,36 +2,49 @@ package br.com.cast.turmaformacao.testecontrole.controller.controller.activities
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.cast.turmaformacao.testecontrole.R;
+import br.com.cast.turmaformacao.testecontrole.controller.controller.adapters.StickerGridViewAdapter;
 import br.com.cast.turmaformacao.testecontrole.controller.controller.adapters.StickerListAdapter;
 import br.com.cast.turmaformacao.testecontrole.controller.model.entities.Sticker;
 import br.com.cast.turmaformacao.testecontrole.controller.model.services.StickerBusinessService;
 
 
-public class StickerListActivity extends ActionBarActivity {
+public class StickerListActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
+    GridView gridviewStickers;
+    List<Sticker> gridArray = new ArrayList<Sticker>();
+    StickerGridViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sticker_list);
+        setContentView(R.layout.activity_sticker_list_gridview);
 
-        bindRecyclerView();
+        gridArray = StickerBusinessService.getAll();
+        gridviewStickers = (GridView) findViewById(R.id.gridViewStickers);
+        adapter = new StickerGridViewAdapter(this, R.layout.sticker_gridview_item, gridArray);
+        gridviewStickers.setAdapter(adapter);
+
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_stickers_list, menu);
         return true;
     }
@@ -45,16 +58,5 @@ public class StickerListActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void bindRecyclerView(){
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewStickers);
-
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        StickerListAdapter adapter = new StickerListAdapter(StickerBusinessService.getAll(), this);
-        mRecyclerView.setAdapter(adapter);
     }
 }
