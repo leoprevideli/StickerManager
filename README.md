@@ -1,2 +1,3 @@
 # StickerManager
-Initial test for sticker manager
+- First commit: Tela com RecyclerView
+- Após isso, foi alterada para GridView
