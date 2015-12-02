@@ -43,7 +43,7 @@ public class StickerGridViewAdapter extends ArrayAdapter<Sticker> {
 
         } else {
             holder = (RecordHolder) row.getTag();
-        }
+        } 
 
         holder.count = sticker.getAmount();
         holder.textViewNumber = (TextView) row.findViewById(R.id.textViewNumber);
