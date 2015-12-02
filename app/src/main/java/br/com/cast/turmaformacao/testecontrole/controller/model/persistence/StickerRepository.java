@@ -1,5 +1,6 @@
 package br.com.cast.turmaformacao.testecontrole.controller.model.persistence;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -20,5 +21,19 @@ public class StickerRepository {
         db.close();
         databaseHelper.close();
         return contacts;
+    }
+
+    public static void saveSticker(Sticker sticker) {
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+        ContentValues values = StickerContract.getContentValues(sticker);
+        if (sticker.getNumber() == null) {
+            db.insert(StickerContract.TABLE, null, values);
+        } else {
+            String where = StickerContract.NUMBER + " = ? ";
+            String[] params = {sticker.getNumber().toString()};
+            db.update(StickerContract.TABLE, values, where, params);
+        }
     }
 }

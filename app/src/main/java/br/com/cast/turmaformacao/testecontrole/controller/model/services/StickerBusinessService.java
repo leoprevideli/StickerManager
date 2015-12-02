@@ -14,4 +14,8 @@ public class StickerBusinessService {
     public static List<Sticker> getAll(){
         return StickerRepository.getAll();
     }
+
+    public static void saveSticker(Sticker sticker){
+        StickerRepository.saveSticker(sticker);
+    }
 }

@@ -70,7 +70,7 @@ public class StickerContract {
         sql.append(" ( ");
         sql.append(i + ", ");
         sql.append("'" + "Name " + i + "'" + ", ");
-        sql.append("'" + (i*2) +"'");
+        sql.append("'" + 0 +"'");
         sql.append(" ); ");
         return sql.toString();
     }
